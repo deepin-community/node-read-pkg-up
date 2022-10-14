@@ -1,0 +1,31 @@
+Description: replace ava by tape
+Author: Xavier Guimard <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2020-11-03
+
+--- a/test.js
++++ b/test.js
+@@ -1,6 +1,6 @@
+-import path from 'path';
+-import test from 'ava';
+-import readPackageUp from '.';
++const path = require('path');
++const test = require('tape');
++const readPackageUp = require('.');
+ 
+ const cwd = 'fixture';
+ const packagePath = path.resolve('.', 'package.json');
+@@ -11,6 +11,7 @@
+ 	t.is(result.path, packagePath);
+ 
+ 	t.is(await readPackageUp({cwd: '/'}), undefined);
++	t.end();
+ });
+ 
+ test('sync', t => {
+@@ -19,4 +20,5 @@
+ 	t.is(result.path, packagePath);
+ 
+ 	t.is(readPackageUp.sync({cwd: '/'}), undefined);
++	t.end();
+ });
